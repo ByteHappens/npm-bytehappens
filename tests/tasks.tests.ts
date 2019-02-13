@@ -4,7 +4,7 @@ import { expect } from "chai";
 import * as task from "../src/task";
 import { StaticResultTask } from "./common/staticresulttask";
 
-describe("Basic Task Execution", () => {
+describe("Task Execution", () => {
   it("Should run", async () => {
     let sut: task.ITask = new StaticResultTask(true);
 
