@@ -43,7 +43,7 @@ export class TaskChain<
     if (taskResponse) {
       this._logger.Log(<TLog>{ level: "verbose", message: `Running OnSuccess after ${this._taskName}` });
 
-      await this._onFailure.RunAsync();
+      await this._onSuccess.RunAsync();
       response = await this._onSuccess.GetResultAsync();
     } else {
       this._logger.Log(<TLog>{ level: "verbose", message: `Running OnFailure after ${this._taskName}` });

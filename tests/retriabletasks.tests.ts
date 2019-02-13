@@ -2,6 +2,7 @@ import "mocha";
 import { expect } from "chai";
 
 import * as task from "../src/task";
+
 import { GetTestLoggerFactory } from "./common/gettestloggerfactory";
 import { StaticResultTask } from "./common/staticresulttask";
 import { LambdaTask } from "./common/lambdaresulttask";
