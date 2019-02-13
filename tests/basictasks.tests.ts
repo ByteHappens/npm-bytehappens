@@ -2,11 +2,11 @@ import "mocha";
 import { expect } from "chai";
 
 import * as task from "../src/task";
-import { ExpectedResultTask } from "./common/expectedresulttask";
+import { StaticResultTask } from "./common/staticresulttask";
 
 describe("Basic Task Execution", () => {
   it("Should run", async () => {
-    let sut: task.ITask = new ExpectedResultTask(true);
+    let sut: task.ITask = new StaticResultTask(true);
 
     await sut.RunAsync();
     await sut.GetResultAsync();
@@ -15,7 +15,7 @@ describe("Basic Task Execution", () => {
   it("Should return true", async () => {
     let expectedResult: boolean = true;
 
-    let sut: task.ITask = new ExpectedResultTask(expectedResult);
+    let sut: task.ITask = new StaticResultTask(expectedResult);
 
     await sut.RunAsync();
     let result: boolean = await sut.GetResultAsync();
@@ -26,7 +26,7 @@ describe("Basic Task Execution", () => {
   it("Should return false", async () => {
     let expectedResult: boolean = false;
 
-    let sut: task.ITask = new ExpectedResultTask(expectedResult);
+    let sut: task.ITask = new StaticResultTask(expectedResult);
 
     await sut.RunAsync();
     let result: boolean = await sut.GetResultAsync();

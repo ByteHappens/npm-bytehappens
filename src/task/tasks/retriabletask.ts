@@ -1,6 +1,7 @@
 import { ILog, ILogger, ILoggerFactory } from "../../logging";
 
 import { ITask } from "../interfaces/itask";
+import { IRetriableTask } from "../interfaces/iretriabletask";
 import { BaseTask } from "../bases/basetask";
 
 export class RetriableTask<
@@ -8,14 +9,16 @@ export class RetriableTask<
   TLogger extends ILogger<TLog>,
   TLoggerFactory extends ILoggerFactory<TLog, TLogger>,
   TExecute extends ITask
-> extends BaseTask<TLog, TLogger, TLoggerFactory> {
-  private _onExecute: TExecute;
-  private _attempts: number;
-  private _delayInMs: number;
+> extends BaseTask<TLog, TLogger, TLoggerFactory> implements IRetriableTask {
+  private readonly _onExecute: TExecute;
+  private readonly _maxAttempts: number;
+  private readonly _delayInMs: number;
+
+  private __currentAttempts: number;
 
   public constructor(
     onExecute: TExecute,
-    attempts: number,
+    maxAttempts: number,
     delayInMs: number,
     taskName: string,
     loggerFactory: TLoggerFactory
@@ -23,14 +26,14 @@ export class RetriableTask<
     super(taskName, loggerFactory);
 
     this._onExecute = onExecute;
-    this._attempts = attempts;
+    this._maxAttempts = maxAttempts;
     this._delayInMs = delayInMs;
   }
 
-  public async ExecuteInternalAsync(): Promise<boolean> {
+  protected async ExecuteInternalAsync(): Promise<boolean> {
     let response: boolean = false;
 
-    let currentAttempts: number = 0;
+    this.__currentAttempts = 0;
     let shouldRetry: boolean = false;
     do {
       try {
@@ -40,16 +43,16 @@ export class RetriableTask<
         this._logger.Log(<TLog>{ level: "error", message: "Unexpected error when running task", meta: { error } });
       }
 
-      currentAttempts++;
-      shouldRetry = !response && currentAttempts < this._attempts;
+      this.__currentAttempts++;
+      shouldRetry = !response && this.__currentAttempts < this._maxAttempts;
 
       if (shouldRetry) {
         this._logger.Log(<TLog>{
           level: "error",
           message: "Retrying task after delay",
           meta: {
-            currentAttempts,
-            maxAttempts: this._attempts,
+            currentAttempts: this.__currentAttempts,
+            maxAttempts: this._maxAttempts,
             delayInMs: this._delayInMs
           }
         });
@@ -63,5 +66,9 @@ export class RetriableTask<
     } while (shouldRetry);
 
     return response;
+  }
+
+  public GetCurrentAttempts(): number {
+    return this.__currentAttempts;
   }
 }

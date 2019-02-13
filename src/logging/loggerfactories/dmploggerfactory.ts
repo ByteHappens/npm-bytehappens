@@ -1,7 +1,6 @@
-import { ILog } from "./interfaces/ilog";
-import { ILoggerFactory } from "./interfaces/iloggerfactory";
-
-import { DmpLogger } from "./dmplogger";
+import { ILog } from "../interfaces/ilog";
+import { ILoggerFactory } from "../interfaces/iloggerfactory";
+import { DmpLogger } from "../loggers/dmplogger";
 
 export class DmpLoggerFactory<TLog extends ILog, TLogger extends DmpLogger<TLog>> implements ILoggerFactory<TLog, TLogger> {
   public async CreateLoggerAsync(): Promise<TLogger> {

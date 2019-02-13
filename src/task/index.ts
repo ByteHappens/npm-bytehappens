@@ -1,4 +1,5 @@
 export { ITask } from "./interfaces/itask";
+export { IRetriableTask } from "./interfaces/iretriabletask";
 
 export { BaseTask } from "./bases/basetask";
 

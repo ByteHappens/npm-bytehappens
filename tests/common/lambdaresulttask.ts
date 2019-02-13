@@ -3,20 +3,20 @@ import * as task from "../../src/task";
 
 import { GetTestLoggerFactory } from "./gettestloggerfactory";
 
-export class ExpectedResultTask<
+export class LambdaTask<
   TLog extends logging.ILog,
   TLogger extends logging.DmpLogger<TLog>,
   TLoggerFactory extends logging.DmpLoggerFactory<TLog, TLogger>
 > extends task.BaseTask<TLog, TLogger, TLoggerFactory> {
-  private readonly _expectedResult: boolean;
+  private readonly _lambda: () => boolean;
 
-  constructor(expectedResult: boolean) {
-    super(`ExpectedResultTask-${expectedResult}`, <TLoggerFactory>GetTestLoggerFactory());
+  constructor(lambda: () => boolean) {
+    super("LambdaResultTask", <TLoggerFactory>GetTestLoggerFactory());
 
-    this._expectedResult = expectedResult;
+    this._lambda = lambda;
   }
 
   protected async ExecuteInternalAsync(): Promise<boolean> {
-    return this._expectedResult;
+    return this._lambda();
   }
 }
