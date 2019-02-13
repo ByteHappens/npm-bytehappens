@@ -16,7 +16,7 @@ export class ExitTask<
 
     process.exit();
 
-    //  EBU: Might not be reached
+    //  SCK: Might not be reached
     return true;
   }
 }
