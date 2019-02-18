@@ -1,5 +1,4 @@
-import * as logging from "../../src/logging";
-import * as task from "../../src/task";
+import { logging, task } from "../../lib";
 
 import { GetTestLoggerFactory } from "./gettestloggerfactory";
 

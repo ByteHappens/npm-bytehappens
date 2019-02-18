@@ -1,7 +1,8 @@
 import "mocha";
 import { expect } from "chai";
 
-import * as task from "../src/task";
+import { task } from "../lib";
+
 import { StaticResultTask } from "./common/staticresulttask";
 
 describe("Task Execution", () => {
