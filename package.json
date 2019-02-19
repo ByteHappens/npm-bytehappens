@@ -4,7 +4,11 @@
   "description": "ByteHappens Package for Node.js",
   "author": "Ewan \"ScottChak\" BURNS",
   "keywords": [
-    "bytehappens"
+    "bytehappens",
+    "logging",
+    "runtime",
+    "application",
+    "task"
   ],
   "repository": {
     "type": "git",
