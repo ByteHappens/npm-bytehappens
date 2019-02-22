@@ -12,7 +12,7 @@ export abstract class BaseTask<
 
   protected readonly _taskName: string;
   protected _logger: TLogger;
-  protected _result: Promise<boolean>;
+  protected _result: boolean;
 
   public constructor(taskName: string, loggerFactory: TLoggerFactory) {
     super();
@@ -32,7 +32,7 @@ export abstract class BaseTask<
   protected async RunInternalAsync(): Promise<void> {
     this._logger.Log(<TLog>{ level: "verbose", message: `[Task] ${this._taskName}: Executing` });
 
-    this._result = this.ExecuteInternalAsync();
+    this._result = await this.ExecuteInternalAsync();
 
     this._logger.Log(<TLog>{
       level: "verbose",

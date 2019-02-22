@@ -13,6 +13,7 @@ export abstract class BaseRuntime implements IRuntime {
     }
   }
 
+  //  SCK: For now, no need for this to be async, just need to save the Promise
   private InitialiseAsync(): Promise<void> {
     if (!this._init) {
       this._init = this.InitialiseInternalAsync();
