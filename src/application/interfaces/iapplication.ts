@@ -1,3 +1,5 @@
 import { IRuntime } from "../../runtime";
 
-export interface IApplication extends IRuntime {}
+export interface IApplication extends IRuntime {
+  StopAsync(): Promise<boolean>;
+}

@@ -22,6 +22,8 @@ export abstract class BaseApplication<
 
   protected abstract StartInternalAsync(): Promise<void>;
 
+  protected abstract StopInternalAsync(): Promise<boolean>;
+
   protected async InitialiseInternalAsync(): Promise<void> {
     await super.InitialiseInternalAsync();
 
@@ -31,5 +33,10 @@ export abstract class BaseApplication<
   protected async RunInternalAsync(): Promise<void> {
     this._logger.Log(<TLog>{ level: "verbose", message: `Starting ${this._applicationName} application` });
     await this.StartInternalAsync();
+  }
+
+  public async StopAsync(): Promise<boolean> {
+    this._logger.Log(<TLog>{ level: "verbose", message: `Stoping ${this._applicationName} application` });
+    return await this.StopInternalAsync();
   }
 }
