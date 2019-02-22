@@ -22,7 +22,7 @@
   "types": "./lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "mocha tests/*.tests.ts -r ts-node/register --reporter spec --exit"
+    "test": "mocha tests/**/*.tests.ts -r ts-node/register --reporter spec --exit"
   },
   "dependencies": {
     "dotenv": "^6.1.0"

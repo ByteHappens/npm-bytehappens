@@ -1,12 +1,12 @@
-import { logging, tasks } from "../../lib";
+import { logging, runtimes } from "../../../lib";
 
-import { GetTestLoggerFactory } from "./gettestloggerfactory";
+import { GetTestLoggerFactory } from "../../common/gettestloggerfactory";
 
 export class StaticResultTask<
   TLog extends logging.ILog,
   TLogger extends logging.DmpLogger<TLog>,
   TLoggerFactory extends logging.DmpLoggerFactory<TLog, TLogger>
-> extends tasks.BaseTask<TLog, TLogger, TLoggerFactory> {
+> extends runtimes.tasks.BaseTask<TLog, TLogger, TLoggerFactory> {
   private readonly _staticResult: boolean;
 
   constructor(staticResult: boolean) {
