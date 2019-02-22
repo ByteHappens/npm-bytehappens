@@ -40,7 +40,11 @@ export class RetriableTask<
         await this._onExecute.RunAsync();
         response = await this._onExecute.GetResultAsync();
       } catch (error) {
-        this._logger.Log(<TLog>{ level: "error", message: "Unexpected error when running task", meta: { error } });
+        this._logger.Log(<TLog>{
+          level: "error",
+          message: `[Task] ${this._taskName}: Unexpected error`,
+          meta: { error }
+        });
       }
 
       this.__currentAttempts++;
@@ -49,7 +53,7 @@ export class RetriableTask<
       if (shouldRetry) {
         this._logger.Log(<TLog>{
           level: "error",
-          message: "Retrying task after delay",
+          message: `[Task] ${this._taskName}: Retrying task after delay`,
           meta: {
             currentAttempts: this.__currentAttempts,
             maxAttempts: this._maxAttempts,

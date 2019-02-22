@@ -30,11 +30,24 @@ export abstract class BaseTask<
   }
 
   protected async RunInternalAsync(): Promise<void> {
-    this._logger.Log(<TLog>{ level: "verbose", message: `Executing ${this._taskName} task` });
+    this._logger.Log(<TLog>{ level: "verbose", message: `[Task] ${this._taskName}: Executing` });
+
     this._result = this.ExecuteInternalAsync();
+
+    this._logger.Log(<TLog>{
+      level: "verbose",
+      message: `[Task] ${this._taskName}: Executed`,
+      meta: { success: this._result }
+    });
   }
 
   public async GetResultAsync(): Promise<boolean> {
+    this._logger.Log(<TLog>{
+      level: "verbose",
+      message: `[Task] ${this._taskName}: Reading result`,
+      meta: { success: this._result }
+    });
+
     return this._result;
   }
 }

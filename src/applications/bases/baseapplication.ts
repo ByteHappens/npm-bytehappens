@@ -31,12 +31,24 @@ export abstract class BaseApplication<
   }
 
   protected async RunInternalAsync(): Promise<void> {
-    this._logger.Log(<TLog>{ level: "verbose", message: `Starting ${this._applicationName} application` });
+    this._logger.Log(<TLog>{ level: "verbose", message: `[Application] ${this._applicationName}: Starting` });
+
     await this.StartInternalAsync();
+
+    this._logger.Log(<TLog>{ level: "verbose", message: `[Application] ${this._applicationName}: Started` });
   }
 
   public async StopAsync(): Promise<boolean> {
-    this._logger.Log(<TLog>{ level: "verbose", message: `Stoping ${this._applicationName} application` });
-    return await this.StopInternalAsync();
+    this._logger.Log(<TLog>{ level: "verbose", message: `[Application] ${this._applicationName}: Stoping` });
+
+    let response: boolean = await this.StopInternalAsync();
+
+    this._logger.Log(<TLog>{
+      level: "verbose",
+      message: `[Application] ${this._applicationName}: Stopped`,
+      meta: { success: response }
+    });
+
+    return response;
   }
 }
