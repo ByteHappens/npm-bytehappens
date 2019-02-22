@@ -1,9 +1,9 @@
-import { ILog, ILogger, ILoggerFactory } from "../../logging";
-import { IApplication } from "../../application";
+import { ILog, ILogger, ILoggerFactory } from "../logging";
+import { IApplication } from "../applications";
 
-import { BaseTask } from "../bases/basetask";
+import { BaseTask } from "./bases/basetask";
 
-export class ApplicationTask<
+export class StartApplicationTask<
   TLog extends ILog,
   TLogger extends ILogger<TLog>,
   TLoggerFactory extends ILoggerFactory<TLog, TLogger>

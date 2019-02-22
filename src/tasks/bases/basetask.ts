@@ -1,5 +1,5 @@
 import { ILog, ILogger, ILoggerFactory } from "../../logging";
-import { BaseRuntime } from "../../runtime";
+import { BaseRuntime } from "../../runtimes";
 
 import { ITask } from "../interfaces/itask";
 

@@ -1,18 +1,18 @@
 import "mocha";
 import { expect } from "chai";
 
-import { task } from "../lib";
+import { tasks } from "../lib";
 
 import { GetTestLoggerFactory } from "./common/gettestloggerfactory";
 import { StaticResultTask } from "./common/staticresulttask";
 
 describe("Task Chain Execution", () => {
   it("Should run", async () => {
-    let onExecute = new StaticResultTask(true);
-    let onSuccess = new StaticResultTask(true);
-    let onFailure = new StaticResultTask(false);
+    let onExecute: tasks.ITask = new StaticResultTask(true);
+    let onSuccess: tasks.ITask = new StaticResultTask(true);
+    let onFailure: tasks.ITask = new StaticResultTask(false);
 
-    let sut: task.ITask = new task.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
+    let sut: tasks.ITask = new tasks.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
 
     await sut.RunAsync();
     await sut.GetResultAsync();
@@ -25,7 +25,7 @@ describe("Task Chain Execution", () => {
     let onSuccess = new StaticResultTask(true);
     let onFailure = new StaticResultTask(false);
 
-    let sut: task.ITask = new task.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
+    let sut: tasks.ITask = new tasks.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
 
     await sut.RunAsync();
     let result: boolean = await sut.GetResultAsync();
@@ -40,7 +40,7 @@ describe("Task Chain Execution", () => {
     let onSuccess = new StaticResultTask(true);
     let onFailure = new StaticResultTask(false);
 
-    let sut: task.ITask = new task.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
+    let sut: tasks.ITask = new tasks.TaskChain(onExecute, onSuccess, onFailure, "TaskChain", GetTestLoggerFactory());
 
     await sut.RunAsync();
     let result: boolean = await sut.GetResultAsync();

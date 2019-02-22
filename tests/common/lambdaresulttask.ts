@@ -1,4 +1,4 @@
-import { logging, task } from "../../lib";
+import { logging, tasks } from "../../lib";
 
 import { GetTestLoggerFactory } from "./gettestloggerfactory";
 
@@ -6,7 +6,7 @@ export class LambdaTask<
   TLog extends logging.ILog,
   TLogger extends logging.DmpLogger<TLog>,
   TLoggerFactory extends logging.DmpLoggerFactory<TLog, TLogger>
-> extends task.BaseTask<TLog, TLogger, TLoggerFactory> {
+> extends tasks.BaseTask<TLog, TLogger, TLoggerFactory> {
   private readonly _lambda: () => boolean;
 
   constructor(lambda: () => boolean) {

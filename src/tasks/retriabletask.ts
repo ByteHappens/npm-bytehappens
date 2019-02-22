@@ -1,8 +1,8 @@
-import { ILog, ILogger, ILoggerFactory } from "../../logging";
+import { ILog, ILogger, ILoggerFactory } from "../logging";
 
-import { ITask } from "../interfaces/itask";
-import { IRetriableTask } from "../interfaces/iretriabletask";
-import { BaseTask } from "../bases/basetask";
+import { ITask } from "./interfaces/itask";
+import { IRetriableTask } from "./interfaces/iretriabletask";
+import { BaseTask } from "./bases/basetask";
 
 export class RetriableTask<
   TLog extends ILog,

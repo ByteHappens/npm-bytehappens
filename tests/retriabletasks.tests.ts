@@ -1,7 +1,7 @@
 import "mocha";
 import { expect } from "chai";
 
-import { task } from "../lib";
+import { tasks } from "../lib";
 
 import { GetTestLoggerFactory } from "./common/gettestloggerfactory";
 import { StaticResultTask } from "./common/staticresulttask";
@@ -13,8 +13,8 @@ let testTimout: number = (attempts + 1) * delayInMs;
 
 describe("Retriable Task Execution", () => {
   it("Should run", async () => {
-    let toRetry: task.ITask = new StaticResultTask(true);
-    let sut: task.IRetriableTask = new task.RetriableTask(
+    let toRetry: tasks.ITask = new StaticResultTask(true);
+    let sut: tasks.IRetriableTask = new tasks.RetriableTask(
       toRetry,
       attempts,
       delayInMs,
@@ -29,8 +29,8 @@ describe("Retriable Task Execution", () => {
   it("Should return true", async () => {
     let expectedResult: boolean = true;
 
-    let toRetry: task.ITask = new StaticResultTask(expectedResult);
-    let sut: task.IRetriableTask = new task.RetriableTask(
+    let toRetry: tasks.ITask = new StaticResultTask(expectedResult);
+    let sut: tasks.IRetriableTask = new tasks.RetriableTask(
       toRetry,
       attempts,
       delayInMs,
@@ -47,8 +47,8 @@ describe("Retriable Task Execution", () => {
   it("Should return false", async () => {
     let expectedResult: boolean = false;
 
-    let toRetry: task.ITask = new StaticResultTask(expectedResult);
-    let sut: task.IRetriableTask = new task.RetriableTask(
+    let toRetry: tasks.ITask = new StaticResultTask(expectedResult);
+    let sut: tasks.IRetriableTask = new tasks.RetriableTask(
       toRetry,
       attempts,
       delayInMs,
@@ -66,8 +66,8 @@ describe("Retriable Task Execution", () => {
     let targetAttempts: number = 6;
     let attemptsTracker: number = 0;
 
-    let toRetry: task.ITask = new LambdaTask(() => ++attemptsTracker === targetAttempts);
-    let sut: task.IRetriableTask = new task.RetriableTask(
+    let toRetry: tasks.ITask = new LambdaTask(() => ++attemptsTracker === targetAttempts);
+    let sut: tasks.IRetriableTask = new tasks.RetriableTask(
       toRetry,
       attempts,
       delayInMs,

@@ -1,7 +1,7 @@
-import { ILog, ILogger, ILoggerFactory } from "../../logging";
+import { ILog, ILogger, ILoggerFactory } from "../logging";
 
-import { ITask } from "../interfaces/itask";
-import { BaseTask } from "../bases/basetask";
+import { ITask } from "./interfaces/itask";
+import { BaseTask } from "./bases/basetask";
 
 export class TaskChain<
   TLog extends ILog,
