@@ -7,7 +7,7 @@ export import logging = internalLogging;
 
 export namespace runtimes {
   //  SCK: Not too happy about this, will change when i figure how to put it at root
-  export import common = internalRuntimes;
+  export import core = internalRuntimes;
 
   export import applications = internalApplications;
   export import tasks = internalTasks;
