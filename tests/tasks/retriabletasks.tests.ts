@@ -5,7 +5,6 @@ import { runtimes } from "../../lib";
 
 import { GetTestLoggerFactory } from "../common/gettestloggerfactory";
 import { StaticResultTask } from "./common/staticresulttask";
-import { LambdaTask } from "./common/lambdaresulttask";
 
 let attempts: number = 10;
 let delayInMs: number = 1000;
@@ -66,7 +65,12 @@ describe("Retriable Task Execution", () => {
     let targetAttempts: number = 6;
     let attemptsTracker: number = 0;
 
-    let toRetry: runtimes.tasks.ITask = new LambdaTask(() => ++attemptsTracker === targetAttempts);
+    let toRetry: runtimes.tasks.ITask = new runtimes.tasks.LambdaTask(
+      () => ++attemptsTracker === targetAttempts,
+      "LambdaTask",
+      GetTestLoggerFactory()
+    );
+    
     let sut: runtimes.tasks.IRetriableTask = new runtimes.tasks.RetriableTask(
       toRetry,
       attempts,
