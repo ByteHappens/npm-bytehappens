@@ -7,15 +7,15 @@ export class LambdaTask<
   TLogger extends ILogger<TLog>,
   TLoggerFactory extends ILoggerFactory<TLog, TLogger>
 > extends BaseTask<TLog, TLogger, TLoggerFactory> {
-  private readonly _lambda: () => boolean;
+  private readonly _lambda: () => Promise<boolean>;
 
-  constructor(lambda: () => boolean, taskName: string, loggerFactory: TLoggerFactory) {
+  constructor(lambda: () => Promise<boolean>, taskName: string, loggerFactory: TLoggerFactory) {
     super(taskName, loggerFactory);
 
     this._lambda = lambda;
   }
 
-  protected async ExecuteInternalAsync(): Promise<boolean> {
+  protected ExecuteInternalAsync(): Promise<boolean> {
     return this._lambda();
   }
 }

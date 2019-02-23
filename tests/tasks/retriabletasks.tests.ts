@@ -66,11 +66,11 @@ describe("Retriable Task Execution", () => {
     let attemptsTracker: number = 0;
 
     let toRetry: runtimes.tasks.ITask = new runtimes.tasks.LambdaTask(
-      () => ++attemptsTracker === targetAttempts,
+      async () => ++attemptsTracker === targetAttempts,
       "LambdaTask",
       GetTestLoggerFactory()
     );
-    
+
     let sut: runtimes.tasks.IRetriableTask = new runtimes.tasks.RetriableTask(
       toRetry,
       attempts,
