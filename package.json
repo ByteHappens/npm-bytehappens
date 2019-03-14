@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": "10.15.1"
+    "node": ">=10.15.1"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
