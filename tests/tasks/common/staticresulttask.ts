@@ -9,7 +9,7 @@ export class StaticResultTask<
 > extends runtimes.tasks.BaseTask<TLog, TLogger, TLoggerFactory> {
   private readonly _staticResult: boolean;
 
-  constructor(staticResult: boolean) {
+  public constructor(staticResult: boolean) {
     super(`StaticResultTask-${staticResult}`, <TLoggerFactory>GetTestLoggerFactory());
 
     this._staticResult = staticResult;

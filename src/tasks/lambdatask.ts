@@ -9,7 +9,7 @@ export class LambdaTask<
 > extends BaseTask<TLog, TLogger, TLoggerFactory> {
   private readonly _lambda: () => Promise<boolean>;
 
-  constructor(lambda: () => Promise<boolean>, taskName: string, loggerFactory: TLoggerFactory) {
+  public constructor(lambda: () => Promise<boolean>, taskName: string, loggerFactory: TLoggerFactory) {
     super(taskName, loggerFactory);
 
     this._lambda = lambda;
